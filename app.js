@@ -28,12 +28,14 @@ function read_gamelog(bot) {
     tail.on('line', async line => {
         const chat = line.split(':');
         const find = chat[1].split(' ');
+        //Cod Praser sometimes has bugs with player names.
         if (find[1] == "say") {
             if (chat.length == 4) {
                 console.log(chat[2] + ": " + chat[3]);
+                //prevent evenyone and here ping
                 msg = chat[3].replace("@everyone", "");
                 msg = msg.replace("@here", "");
-                    
+                //remove the color code from the player name
                 user = chat[2].replace("^0", "");
                 user = user.replace("^1", "");
                 user = user.replace("^2", "");

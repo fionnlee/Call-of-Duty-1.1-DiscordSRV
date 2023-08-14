@@ -3,6 +3,7 @@ const bot = new Client({intents: [ GatewayIntentBits.DirectMessages, GatewayInte
 const fs = require('fs');
 const RCON = require('quake3-rcon');
 const Tail = require('tail').Tail;
+
 const {SERVER_IP, SERVER_PORT, SERVER_RCONPASS, SERVER_GAMELOG_PATH, CHANNEL_ID, BOT_TOKEN} = require('./config.json')
 const tail = new Tail(SERVER_GAMELOG_PATH, "\n", {}, true);
 const rcon = new RCON({ address: SERVER_IP, port: SERVER_PORT, password: SERVER_RCONPASS });

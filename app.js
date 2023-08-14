@@ -1,3 +1,4 @@
+//Bot start
 const { Client, GatewayIntentBits, WebhookClient, Util } = require("discord.js");
 const bot = new Client({intents: [ GatewayIntentBits.DirectMessages, GatewayIntentBits.Guilds, GatewayIntentBits.GuildBans, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, ], ws: { properties: { browser: 'Discord iOS' } },});
 const fs = require('fs');
@@ -9,7 +10,8 @@ const tail = new Tail(SERVER_GAMELOG_PATH, "\n", {}, true);
 const rcon = new RCON({ address: SERVER_IP, port: SERVER_PORT, password: SERVER_RCONPASS });
 
 bot.on("ready", () => { 
-    console.log("BoT Online!")
+    console.log("CoD 1.1 DiscordSRV By Fionn")
+    console.log("Contact: fionnlee#5322")
     read_gamelog(bot);
 });
 
@@ -21,7 +23,7 @@ bot.on('messageCreate', async (message)  => {
         });
     }
 });
-
+// Chat parser 
 function read_gamelog(bot) {
     tail.on('line', async line => {
         const chat = line.split(':');

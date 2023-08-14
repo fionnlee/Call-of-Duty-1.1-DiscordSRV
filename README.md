@@ -18,3 +18,4 @@ A Discord bot for linking Discord and servers for sharing chat.
         "BOT_TOKEN" : "wdwdwdwwaad.wdddwdwd.wdddddddddddddddddd"
       }
    ```
+6. Finally run `app.js`  `node app.js`

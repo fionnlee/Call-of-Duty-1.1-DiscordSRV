@@ -3,9 +3,9 @@ const bot = new Client({intents: [ GatewayIntentBits.DirectMessages, GatewayInte
 const fs = require('fs');
 const RCON = require('quake3-rcon');
 const Tail = require('tail').Tail;
-const {Webhook_ID, Webhook_Token, Banlist_Path} = require('./config.json')
-const tail = new Tail("/home/ubuntu/sd/main/game_mp.log", "\n", {}, true);
-const rcon = new RCON({ address: '', port: 20600, password: '' });
+const {SERVER_IP, SERVER_PORT, SERVER_RCONPASS, SERVER_GAMELOG_PATH, CHANNEL_ID, BOT_TOKEN} = require('./config.json')
+const tail = new Tail(SERVER_GAMELOG_PATH, "\n", {}, true);
+const rcon = new RCON({ address: SERVER_IP, port: SERVER_PORT, password: SERVER_RCONPASS });
 
 bot.on("ready", () => { 
     console.log("BoT Online!")
@@ -14,7 +14,7 @@ bot.on("ready", () => {
 
 bot.on('messageCreate', async (message)  => {
     if (message.author.bot) return;
-    if (message.channel.id === '1129299969787035688') {
+    if (message.channel.id === CHANNEL_ID) {
         rcon.send('say ^5[Discord]^7' + message.author.username + '^3: ^7' + message.content, (response) => {
             console.log(message.author.username + ': ' + message.content);
         });
@@ -42,7 +42,7 @@ function read_gamelog(bot) {
                 user = user.replace("^8", "");
                 user = user.replace("^9", "");
                     
-                bot.channels.fetch('1129299969787035688')
+                bot.channels.fetch(CHANNEL_ID)
                 .then(channel => {
                     channel.send("**" + user + "**" + ": " + msg);
                 })
@@ -64,7 +64,7 @@ function read_gamelog(bot) {
                 user = user.replace("^8", "");
                 user = user.replace("^9", "");
                     
-                bot.channels.fetch('1129299969787035688')
+                bot.channels.fetch(CHANNEL_ID)
                 .then(channel => {
                      channel.send("**" + user + "**" + ": " + msg);
                 })
@@ -74,4 +74,4 @@ function read_gamelog(bot) {
     });
 }
 
-bot.login();
+bot.login(BOT_TOKEN);

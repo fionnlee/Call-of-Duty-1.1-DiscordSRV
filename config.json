@@ -1,8 +1,8 @@
 {
-    "SERVER_IP": "1131191965829046303",
-    "SERVER_PORT": "5WvFnSdpsbHBPdQygCt2awsR9-g5rDM3-WaR7hvozT40emyX3w514lxaDM0eS-Dge511",
-    "SERVER_RCONPASS": "5WvFnSdpsbHBPdQygCt2awsR9-g5rDM3-WaR7hvozT40emyX3w514lxaDM0eS-Dge511",
-    "SERVER_GAMELOG_PATH": "5WvFnSdpsbHBPdQygCt2awsR9-g5rDM3-WaR7hvozT40emyX3w514lxaDM0eS-Dge511",
-    "CHANNEL_ID" : "/home/ubuntu/sd/main/miscmod_reports.dat",
-    "BOT_TOKEN" : "/home/ubuntu/sd/main/miscmod_reports.dat"
+    "SERVER_IP": "1.1.1.1",
+    "SERVER_PORT": 28960,
+    "SERVER_RCONPASS": "rconpass",
+    "SERVER_GAMELOG_PATH": "/path/to/game_mp.log",
+    "CHANNEL_ID" : "11111111111222",
+    "BOT_TOKEN" : "wdwdwdwwaad.wdddwdwd.wdddddddddddddddddd"
 }

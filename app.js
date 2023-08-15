@@ -57,7 +57,7 @@ function read_gamelog(bot) {
                     
                 bot.channels.fetch(CHANNEL_ID)
                 .then(channel => {
-                    channel.send(user + " : " + msg);
+                    channel.send("**" + user + "**" + " : " + msg);
                 })  
             }
             

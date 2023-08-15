@@ -9,6 +9,7 @@ const {SERVER_IP, SERVER_PORT, SERVER_RCONPASS, SERVER_GAMELOG_PATH, CHANNEL_ID,
 const { constants } = require("buffer");
 const tail = new Tail(SERVER_GAMELOG_PATH, "\n", {}, true);
 const rcon = new RCON({ address: SERVER_IP, port: SERVER_PORT, password: SERVER_RCONPASS });
+const ban_words = {"@everyone":"", "@here":""}; //ban word from message
 
 const players = []
 
@@ -35,26 +36,18 @@ function read_gamelog(bot) {
         const jqfindjq = jqfind[0].split(':');
         const jqfindim = jqfindjq[1].split('');
         const find = chat[1].split(' ');
-        const findim = find[0].split(''); // too many split. game_mp.log bug ??
+        const findim = find[0].split('');
         //Cod Praser sometimes has bugs with player names.
-        if (find[1] == "say" || (findim[2] == "s" && findim[3] == "a" && findim[4] == "y")) { // findim game_mp.log bug ??
+        if (find[1] == "say" || (findim[2] == "s" && findim[3] == "a" && findim[4] == "y")) {
             if (chat.length == 4) {
                 console.log(chat[2] + ": " + chat[3]);
                 //prevent evenyone and here ping
-                msg = chat[3].replace("@everyone", "");
-                msg = msg.replace("@here", "");
+                Object.keys(ban_words).forEach((key) => {
+                    msg = chat[3].replaceAll(key, ban_words[key]);
+                });
                 //remove the color code from the player name
-                user = chat[2].replace("^0", "");
-                user = user.replace("^1", "");
-                user = user.replace("^2", "");
-                user = user.replace("^3", "");
-                user = user.replace("^4", "");
-                user = user.replace("^5", "");
-                user = user.replace("^6", "");
-                user = user.replace("^7", "");
-                user = user.replace("^8", "");
-                user = user.replace("^9", "");
-                    
+                user = chat[2].replace('^0',' ').replace('^1','').replace('^2','').replace('^3','').replace('^4','').replace('^5','').replace('^6','').replace('^7','');
+
                 bot.channels.fetch(CHANNEL_ID)
                 .then(channel => {
                     channel.send("**" + user + "**" + " : " + msg);
@@ -62,22 +55,13 @@ function read_gamelog(bot) {
             }
             
         }
-        else if(jqfind[1] == "J" || (jqfindim[2] == "J")){ // jqfindim game_mp.log bug ??
+        else if(jqfind[1] == "J" || (jqfindim[2] == "J")){
             if(!players.includes(jq[2])){
                 players.push(jq[2])
-
-                user = jq[2].replace("^0", "");
-                user = user.replace("^1", "");
-                user = user.replace("^2", "");
-                user = user.replace("^3", "");
-                user = user.replace("^4", "");
-                user = user.replace("^5", "");
-                user = user.replace("^6", "");
-                user = user.replace("^7", "");
-                user = user.replace("^8", "");
-                user = user.replace("^9", "");
+                //replace color code
+                user = jq[2].replace('^0',' ').replace('^1','').replace('^2','').replace('^3','').replace('^4','').replace('^5','').replace('^6','').replace('^7','');
                 
-                const embed = new EmbedBuilder() //embed join notify
+                const embed = new EmbedBuilder()
                 .setAuthor({
                   name: user + " joined the server",
                   iconURL: "https://media.discordapp.net/attachments/866353111244865576/1140862728660066394/6910-awww.png",
@@ -99,19 +83,9 @@ function read_gamelog(bot) {
                 if (index > -1) { 
                     players.splice(index, 1);
                 }
-
-                user = jq[2].replace("^0", "");
-                user = user.replace("^1", "");
-                user = user.replace("^2", "");
-                user = user.replace("^3", "");
-                user = user.replace("^4", "");
-                user = user.replace("^5", "");
-                user = user.replace("^6", "");
-                user = user.replace("^7", "");
-                user = user.replace("^8", "");
-                user = user.replace("^9", "");
-                
-                const embed = new EmbedBuilder() //embed left notify
+                //replace color code
+                user = jq[2].replace('^0',' ').replace('^1','').replace('^2','').replace('^3','').replace('^4','').replace('^5','').replace('^6','').replace('^7','');
+                const embed = new EmbedBuilder()
                 .setAuthor({
                   name: user + " left the server",
                   iconURL: "https://cdn.discordapp.com/attachments/866353111244865576/1140862845798592615/8727-cryig.png",

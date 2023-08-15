@@ -83,6 +83,7 @@ function read_gamelog(bot) {
                   iconURL: "https://media.discordapp.net/attachments/866353111244865576/1140862728660066394/6910-awww.png",
                 })
                 .setColor("#00f549")
+                .setTimestamp();
                 
                 bot.channels.fetch(CHANNEL_ID)
                 .then(channel => {
@@ -116,6 +117,7 @@ function read_gamelog(bot) {
                   iconURL: "https://cdn.discordapp.com/attachments/866353111244865576/1140862845798592615/8727-cryig.png",
                 })
                 .setColor("#f50000")
+                .setTimestamp();
                 
                 bot.channels.fetch(CHANNEL_ID)
                 .then(channel => {

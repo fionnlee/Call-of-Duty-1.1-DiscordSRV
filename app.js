@@ -33,12 +33,9 @@ function read_gamelog(bot) {
         const chat = line.split(':');
         const jq = line.split(';');
         const jqfind = jq[0].split(' ');
-        const jqfindjq = jqfind[0].split(':');
-        const jqfindim = jqfindjq[1].split('');
         const find = chat[1].split(' ');
-        const findim = find[0].split('');
         //Cod Praser sometimes has bugs with player names.
-        if (find[1] == "say" || (findim[2] == "s" && findim[3] == "a" && findim[4] == "y")) {
+        if (find[1] == "say") {
             if (chat.length == 4) {
                 console.log(chat[2] + ": " + chat[3]);
                 //prevent evenyone and here ping
@@ -55,7 +52,7 @@ function read_gamelog(bot) {
             }
             
         }
-        else if(jqfind[1] == "J" || (jqfindim[2] == "J")){
+        else if(jqfind[1] == "J"){
             if(!players.includes(jq[2])){
                 players.push(jq[2])
                 //replace color code
@@ -77,7 +74,7 @@ function read_gamelog(bot) {
 
         }
 
-        else if(jqfind[1] == "Q" || (jqfindim[2] == "Q")){
+        else if(jqfind[1] == "Q"){
             if(players.includes(jq[2])){
                 const index = players.indexOf(jq[2]);
                 if (index > -1) { 

@@ -23,4 +23,3 @@ A Discord bot for linking Discord and servers for sharing chat.
 8. Run the bot with the following command `node app.js`
 
 ## Enjoy.
-[*] CoD RCM Tool coming soon.
